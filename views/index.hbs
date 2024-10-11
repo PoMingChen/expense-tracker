@@ -1,0 +1,82 @@
+<nav class="navbar navbar-light bg-light mb-4">
+  <div class="container"> <!-- Changed from container-fluid to container for centered content -->
+    <h2 class="navbar-brand">家庭記帳本</h2>
+    <a href="/logout" class="btn btn-outline-danger">登出</a>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5"> <!-- Wrapper container for the content -->
+
+  <!-- Category Filter -->
+  <div class="row mb-4">
+    <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
+      <label for="category" class="form-label">類別</label>
+      <select class="form-select" id="category">
+        <option selected>請選擇類別</option>
+        <!-- Default content as an example -->
+        <option value="1">飲食</option>
+        <option value="2">交通</option>
+        <option value="3">娛樂</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Total Amount Display -->
+  <div class="row mb-4">
+    <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
+      <div class="text-center">
+        <h4>總金額：</h4>
+        <h1 class="text-danger">25260</h1> <!-- Default example amount -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Spending Items List -->
+  <div class="row">
+    <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
+      <ul class="list-group">
+        <!-- Example expense item layout -->
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-utensils fa-2x me-3"></i>
+            <div>
+              <h5>午餐</h5>
+              <small class="text-muted">2019/04/23</small>
+            </div>
+          </div>
+          <span>60</span>
+          <div>
+            <a href="/expenses/1/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
+            <form action="/expenses/1?_method=DELETE" method="POST" class="d-inline">
+              <button class="btn btn-outline-danger btn-sm">刪除</button>
+            </form>
+          </div>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-film fa-2x me-3"></i>
+            <div>
+              <h5>電影</h5>
+              <small class="text-muted">2019/04/22</small>
+            </div>
+          </div>
+          <span>220</span>
+          <div>
+            <a href="/expenses/2/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
+            <form action="/expenses/2?_method=DELETE" method="POST" class="d-inline">
+              <button class="btn btn-outline-danger btn-sm">刪除</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- New Expense Button -->
+  <div class="text-center mt-4">
+    <a href="/expenses/new" class="btn btn-warning">新增支出</a>
+  </div>
+
+</div>
