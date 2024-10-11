@@ -10,6 +10,7 @@ const methodOverride = require('method-override')
 const router = require('./routes')
 const messageHandler = require('./middlewares/message-handler')
 const errorHandler = require('./middlewares/error-handler')
+const passport = require('./config/passport.js')
 
 app.engine('.hbs',
   engine({
@@ -38,6 +39,9 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(flash());
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(messageHandler)
 
 
 // Define a route for the root URL
