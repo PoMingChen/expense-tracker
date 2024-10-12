@@ -15,9 +15,11 @@
       <select class="form-select" id="category">
         <option selected>請選擇類別</option>
         <!-- Default content as an example -->
-        <option value="1">飲食</option>
-        <option value="2">交通</option>
-        <option value="3">娛樂</option>
+        <option value="1">家居物業</option>
+        <option value="2">交通出行</option>
+        <option value="3">休閒娛樂</option>
+        <option value="4">餐飲食品</option>
+        <option value="5">其他</option>
       </select>
     </div>
   </div>
@@ -26,7 +28,6 @@
   <div class="row mb-4">
     <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
       <div class="text-center">
-        <h4>總金額：</h4>
         <h1 class="text-danger">25260</h1> <!-- Default example amount -->
       </div>
     </div>
@@ -47,8 +48,8 @@
           </div>
           <span>60</span>
           <div>
-            <a href="/expenses/1/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
-            <form action="/expenses/1?_method=DELETE" method="POST" class="d-inline">
+            <a href="/expense_tracker/1/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
+            <form action="/expense_tracker/1?_method=DELETE" method="POST" class="d-inline">
               <button class="btn btn-outline-danger btn-sm">刪除</button>
             </form>
           </div>
@@ -64,8 +65,8 @@
           </div>
           <span>220</span>
           <div>
-            <a href="/expenses/2/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
-            <form action="/expenses/2?_method=DELETE" method="POST" class="d-inline">
+            <a href="/expense_tracker/2/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
+            <form action="/expense_tracker/2?_method=DELETE" method="POST" class="d-inline">
               <button class="btn btn-outline-danger btn-sm">刪除</button>
             </form>
           </div>
@@ -76,7 +77,8 @@
 
   <!-- New Expense Button -->
   <div class="text-center mt-4">
-    <a href="/expenses/new" class="btn btn-warning">新增支出</a>
+    <a href="/expense_tracker/new" class="btn btn-warning">新增支出</a>
   </div>
 
 </div>
+
