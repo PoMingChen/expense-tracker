@@ -19,6 +19,14 @@ router.get('/', (req, res, next) => {
   console.log(matchedCategoryId);
   const userId = req.user.id;
 
+  const categoryIcons = {
+    1: 'fa-home',
+    2: 'fa-shuttle-van',
+    3: 'fa-grin-beam',
+    4: 'fa-utensils',
+    5: 'fa-pen'
+  };
+
   // Build the base where condition (only by userId)
   let whereCondition = { userId };
 
@@ -36,7 +44,12 @@ router.get('/', (req, res, next) => {
     .then((records) => {
 
       console.log(matchedCategoryId);
-      res.render('index', { records, matchedCategoryId })  // Render the page with the matched restaurants
+      res.render('index',
+        {
+          records,
+          matchedCategoryId,
+          categoryIcons
+        })  // Render the page with the matched restaurants
     })
     .catch((error) => {
       error.errorMessage = '資料取得失敗:(' // Set error message
@@ -56,7 +69,7 @@ router.post('/', (req, res, next) => { // don't forget to next parameter
   console.log(req.body)
 
   // Create a new record in the database using formData
-  return record.create({
+  return recordList.create({
     name,
     date,
     amount,

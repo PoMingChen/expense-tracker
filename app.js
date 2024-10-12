@@ -16,9 +16,22 @@ app.engine('.hbs',
   engine({
     extname: '.hbs',
     helpers: {
-      eq: (a, b) => a === b  // Custom 'eq' helper for equality check
+      // Helper for checking equality
+      eq: (a, b) => a === b,
+
+      // Helper for returning the correct icon based on categoryId
+      getIcon: function (categoryId) {
+        const CATEGORY_ICONS = {
+          1: 'fa-home',
+          2: 'fa-shuttle-van',
+          3: 'fa-grin-beam',
+          4: 'fa-utensils',
+          5: 'fa-pen'
+        };
+        return CATEGORY_ICONS[categoryId];
+      }
     }
-  }))
+  }));
 
 app.set('view engine', '.hbs')
 app.set('views', './views')
