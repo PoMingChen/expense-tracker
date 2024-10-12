@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: { //Add Foregin Key userId
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
     categoryId: { //Add Foregin Key categoryId
       type: DataTypes.INTEGER,
       allowNull: false
