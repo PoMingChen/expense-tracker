@@ -13,15 +13,19 @@
     {{!-- {{> message}} --}}
     <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
       <label for="categoryId" class="form-label">類別</label>
-      <select class="form-select" id="categoryId" name="categoryId">
-        <option selected>請選擇類別</option>
-        <!-- Default content as an example -->
-        <option value="1">家居物業</option>
-        <option value="2">交通出行</option>
-        <option value="3">休閒娛樂</option>
-        <option value="4">餐飲食品</option>
-        <option value="5">其他</option>
-      </select>
+      <form action="/expense_tracker" method="GET">
+        <div class="form-group">
+          <select id="categoryId" name="categoryId" class="form-control" onchange="this.form.submit()">
+            <option value="" {{#unless matchedCategoryId}}selected{{/unless}}>請選擇類別</option>
+            <option value="1" {{#if (eq matchedCategoryId "1" )}}selected{{/if}}>家居物業</option>
+            <option value="2" {{#if (eq matchedCategoryId "2" )}}selected{{/if}}>交通出行</option>
+            <option value="3" {{#if (eq matchedCategoryId "3" )}}selected{{/if}}>休閒娛樂</option>
+            <option value="4" {{#if (eq matchedCategoryId "4" )}}selected{{/if}}>餐飲食品</option>
+            <option value="5" {{#if (eq matchedCategoryId "5" )}}selected{{/if}}>其他</option>
+          </select>
+        </div>
+      </form>
+
     </div>
   </div>
 
