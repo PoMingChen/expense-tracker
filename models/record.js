@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     date: DataTypes.DATE,
     amount: DataTypes.DECIMAL,
-    category: DataTypes.STRING,
     userId: { //Add Foregin Key userId
       type: DataTypes.INTEGER,
       allowNull: false
