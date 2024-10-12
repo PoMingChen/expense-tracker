@@ -35,12 +35,15 @@ router.get('/', (req, res, next) => {
   })
     .then((records) => {
 
-      console.log(matchedCategoryId);
-      res.render('index',
-        {
-          records,
-          matchedCategoryId
-        })  // Render the page with the matched restaurants
+      // Calculate total amount from the fetched records
+      const totalAmount = records.reduce((sum, record) => sum + Number(record.amount), 0);
+
+      // Render the index.hbs file and pass records and totalAmount
+      res.render('index', {
+        records,
+        matchedCategoryId,
+        totalAmount // Pass the total amount to the view
+      });
     })
     .catch((error) => {
       error.errorMessage = '資料取得失敗:(' // Set error message
