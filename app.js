@@ -36,8 +36,13 @@ app.engine('.hbs',
         const month = (d.getMonth() + 1).toString().padStart(2, '0'); // Ensure two digits for month
         const day = d.getDate().toString().padStart(2, '0'); // Ensure two digits for day
         return `${year}-${month}-${day}`; // Return in YYYY-MM-DD format
-      }
+      },
+      currentDate: function () {
+        const date = new Date();
 
+        // .toISOString().split('T')[0] converts the date to the ISO format(YYYY- MM - DDTHH: MM: SSZ) and then splits it at T, taking the date part(YYYY - MM - DD).
+        return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+      }
     }
   }));
 
