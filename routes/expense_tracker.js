@@ -80,4 +80,36 @@ router.post('/', (req, res, next) => { // don't forget to next parameter
     })
 })
 
+// Fetch specific restaurant by ID and check access permissions
+router.get('/:id/edit', (req, res, next) => {
+  // The req.params.id is used to access the id parameter within the route handler.
+  const id = req.params.id
+  const userId = req.user.id // Store the user.id from the deserialized req.user
+
+  recordList.findByPk(id, {
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    raw: true
+  })
+    .then((record) => {
+      if (!record) {
+        req.flash('error', '找不到資料')
+        return res.redirect('/expense_tracker')
+      }
+
+      // If the userId associated with this restaurant doesn't match the current logged-in user's userId (req.user.id), show an unauthorized error message
+      if (record.userId !== userId) {
+        req.flash('error', '權限不足')
+        return res.redirect('/expense_tracker')
+      }
+      console.log(record.date); // Log the date to check its value
+      console.log(record.categoryId);
+      res.render('edit', { record })
+    })
+    .catch((error) => {
+      error.errorMessage = '資料取得失敗:('
+      next(error)
+    })
+})
+
+
 module.exports = router
