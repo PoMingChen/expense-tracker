@@ -19,13 +19,13 @@
 
         <!-- Date Input -->
         <div class="mb-3">
-          <label for="date" class="form-label">日期：</label>
+          <label for="date" class="form-label">日期<span class="text-danger">*</span>：</label>
           <input type="date" class="form-control" id="date" name="date" value="{{currentDate}}" required>
         </div>
 
         <!-- Category Input -->
         <div class="mb-3">
-          <label for="category" class="form-label">類別：</label>
+          <label for="category" class="form-label">類別<span class="text-danger">*</span>：</label>
           <select class="form-select" id="category" name="category" required>
             <option value="" selected>請選擇類別</option>
             <!-- You can dynamically populate these options from your database -->
