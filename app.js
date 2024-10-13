@@ -30,14 +30,14 @@ app.engine('.hbs',
         };
         return CATEGORY_ICONS[categoryId];
       },
-
       formatDate: function (date) {
         const d = new Date(date);
         const year = d.getFullYear();
-        const month = d.getMonth() + 1; // Months are zero-based
-        const day = d.getDate();
-        return `${year}/${month}/${day}`;
+        const month = (d.getMonth() + 1).toString().padStart(2, '0'); // Ensure two digits for month
+        const day = d.getDate().toString().padStart(2, '0'); // Ensure two digits for day
+        return `${year}-${month}-${day}`; // Return in YYYY-MM-DD format
       }
+
     }
   }));
 
