@@ -80,7 +80,7 @@ router.post('/', (req, res, next) => { // don't forget to next parameter
     })
 })
 
-// Fetch specific restaurant by ID and check access permissions
+// Fetch specific record by ID and check access permissions
 router.get('/:id/edit', (req, res, next) => {
   // The req.params.id is used to access the id parameter within the route handler.
   const id = req.params.id
@@ -109,6 +109,38 @@ router.get('/:id/edit', (req, res, next) => {
       error.errorMessage = '資料取得失敗:('
       next(error)
     })
+})
+
+router.post('/:id/edit', (req, res, next) => {
+  const id = req.params.id
+  const updateData = req.body // Contains all the updated fields
+  const userId = req.user.id // Store the user.id from the deserialized req.user
+
+  return recordList.findByPk(id, {
+    attributes: { exclude: ['createdAt', 'updatedAt'] }
+  })
+    .then((record) => {
+      if (!record) {
+        req.flash('error', '找不到資料')
+        return res.redirect('/expense_tracker')
+      }
+      if (record.userId !== userId) {
+        req.flash('error', '權限不足')
+        return res.redirect('/expense_tracker')
+      }
+
+      //Make sure to use restaurant, not restaurantList, as this is an instance method.
+      return record.update(updateData)  // No need to write { where: { id } } since we already fetched it using findByPk earlier.
+        .then(() => {
+          req.flash('success', '更新成功!')
+          return res.redirect(`/expense_tracker`)
+        })
+    })
+    .catch((error) => {
+      error.errorMessage = '更新失敗:('
+      next(error)
+    })
+
 })
 
 
