@@ -42,9 +42,21 @@ app.engine('.hbs',
 
         // .toISOString().split('T')[0] converts the date to the ISO format(YYYY- MM - DDTHH: MM: SSZ) and then splits it at T, taking the date part(YYYY - MM - DD).
         return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+      },
+      // Helper for converting categoryId to Chinese words
+      getCategoryName: function (categoryId) {
+        const CATEGORY_NAMES = {
+          1: '家居物業',
+          2: '交通出行',
+          3: '休閒娛樂',
+          4: '餐飲食品',
+          5: '其他'
+        };
+        return CATEGORY_NAMES[categoryId] || '未知類別';
       }
     }
-  }));
+  })
+);
 
 app.set('view engine', '.hbs')
 app.set('views', './views')

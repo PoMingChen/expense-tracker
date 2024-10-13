@@ -24,8 +24,8 @@
 
         <!-- Category Input -->
         <div class="mb-3">
-          <label for="category" class="form-label">類別：</label>
-          <select class="form-select" id="category" name="category" required>
+          <label for="categoryId" class="form-label">類別：</label>
+          <select class="form-select" id="categoryId" name="categoryId" required>
             <option value="" {{#unless record.categoryId}}selected{{/unless}}>請選擇類別</option>
             <option value=1 {{#if (eq record.categoryId 1)}}selected{{/if}}>家居物業</option>
             <option value=2 {{#if (eq record.categoryId 2)}}selected{{/if}}>交通出行</option>
