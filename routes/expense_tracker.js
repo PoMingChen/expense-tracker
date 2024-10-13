@@ -143,5 +143,36 @@ router.post('/:id/edit', (req, res, next) => {
 
 })
 
+router.delete('/:id', (req, res, next) => {
+  const id = req.params.id
+  const userId = req.user.id
+
+  return recordList.findByPk(id, {
+    attributes: { exclude: ['createdAt', 'updatedAt'] }
+  })
+    .then((record) => {
+      if (!record) {
+        req.flash('error', '找不到資料')
+        return res.redirect('/expense_tracker')
+      }
+      if (record.userId !== userId) {
+        req.flash('error', '權限不足')
+        return res.redirect('/expense_tracker')
+      }
+
+      //Make sure to use restaurant, not restaurantList, as this is an instance method.
+      return record.destroy()// No need to write { where: { id } } since we already fetched it using findByPk earlier.
+        .then(() => {
+          req.flash('success', '刪除成功!')
+          return res.redirect('/expense_tracker')
+        })
+    })
+    .catch((error) => {
+      error.errorMessage = '刪除失敗:('
+      next(error)
+    })
+})
+
+
 
 module.exports = router

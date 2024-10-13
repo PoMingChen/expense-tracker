@@ -56,7 +56,8 @@
           <span>{{record.amount}}</span>
           <div>
             <a href="/expense_tracker/{{record.id}}/edit" class="btn btn-outline-secondary btn-sm me-2">修改</a>
-            <form action="/expense_tracker/1?_method=DELETE" method="POST" class="d-inline">
+
+            <form action="/expense_tracker/{{record.id}}?_method=DELETE" method="POST" class="d-inline">
               <button class="btn btn-outline-danger btn-sm">刪除</button>
             </form>
           </div>
