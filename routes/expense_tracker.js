@@ -15,8 +15,12 @@ const recordList = db.Record
 // })
 
 router.get('/', (req, res, next) => {
-  const matchedCategoryId = req.query.categoryId;  // Retrieve the selected category from the query
-  console.log(matchedCategoryId);
+  let matchedCategoryId = req.query.categoryId;  // Retrieve the   // If no category is selected or categoryId is an empty string, set it to null
+  if (!matchedCategoryId) {
+    matchedCategoryId = null;  // Handle case where no category is selected
+  } else {
+    matchedCategoryId = parseInt(matchedCategoryId, 10); // Convert categoryId to integer if it's present
+  }
   const userId = req.user.id;
 
   // Build the base where condition (only by userId)

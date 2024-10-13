@@ -17,7 +17,6 @@
         <div class="form-group">
           <select id="categoryId" name="categoryId" class="form-control" onchange="this.form.submit()">
             <option value="" {{#unless matchedCategoryId}}selected{{/unless}}>請選擇類別</option>
-            <!-- Use numeric values without quotes to ensure they are treated as integers -->
             <option value=1 {{#if (eq matchedCategoryId 1 )}}selected{{/if}}>家居物業</option>
             <option value=2 {{#if (eq matchedCategoryId 2 )}}selected{{/if}}>交通出行</option>
             <option value=3 {{#if (eq matchedCategoryId 3 )}}selected{{/if}}>休閒娛樂</option>
@@ -26,7 +25,6 @@
           </select>
         </div>
       </form>
-
     </div>
   </div>
 
@@ -34,7 +32,7 @@
   <div class="row mb-4">
     <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
       <div class="text-center">
-        <h1 class="text-danger">{{totalAmount}}</h1> <!-- Default example amount -->
+        <h1 class="text-danger">{{totalAmount}}</h1>
       </div>
     </div>
   </div>
