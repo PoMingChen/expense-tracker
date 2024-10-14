@@ -1,6 +1,11 @@
 module.exports = (req, res, next) => {
-  res.locals.success_msg = req.flash('success')
-  res.locals.error_msg = req.flash('error')
+
+  const successMessages = req.flash('success');  // Fetch success messages
+  const errorMessages = req.flash('error');      // Fetch error messages
+
+  // Store the messages in res.locals so they are accessible in your templates
+  res.locals.success_msg = successMessages;
+  res.locals.error_msg = errorMessages;
 
   next()
 }

@@ -1,15 +1,15 @@
 // Load the express module
 const express = require('express');
-const flash = require('connect-flash')
-const session = require('express-session')
+const flash = require('connect-flash');
+const session = require('express-session');
 const { engine } = require('express-handlebars')
 const port = 3000;
 // Initialize the app
 const app = express();
 const methodOverride = require('method-override')
 const router = require('./routes')
-const messageHandler = require('./middlewares/message-handler')
-const errorHandler = require('./middlewares/error-handler')
+const messageHandler = require('./middlewares/message-handler.js')
+const errorHandler = require('./middlewares/error-handler.js')
 const passport = require('./config/passport.js')
 
 app.engine('.hbs',
@@ -71,15 +71,17 @@ if (process.env.NODE_ENV === 'development') {
 console.log('env', process.env.NODE_ENV)
 console.log('env', process.env.SESSION_SECRET)
 
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
+
+// Flash middleware
 app.use(flash());
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(messageHandler)
 
 
 // Define a route for the root URL
@@ -92,6 +94,7 @@ app.use(router) // 將 request 導入路由器(思考要放在 app.get('/' ,...)
 app.get('/', (req, res) => {
   res.redirect('/register')
 })
+
 app.use(errorHandler)
 
 // Start the server and listen on port 3000

@@ -11,7 +11,7 @@
 
   <!-- Category Filter -->
   <div class="row mb-4">
-    {{!-- {{> message}} --}}
+
     <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
       <label for="categoryId" class="form-label">類別</label>
       <form action="/expense_tracker" method="GET">
@@ -41,6 +41,8 @@
   <!-- Spending Items List -->
   <div class="row">
     <div class="col-md-8 col-12 mx-auto"> <!-- Restricted width with col-md-8 -->
+
+      {{> message}}
       <ul class="list-group">
         <!-- Example expense item layout -->
         {{#each records as |record|}}
