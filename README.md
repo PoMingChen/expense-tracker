@@ -12,7 +12,7 @@
 ## 功能截圖
 
 - 註冊帳密
-![Feature_Register](./public /images/Feature_Register.png)
+![Feature_Register](./public/images/Feature_Register.png)
 
 - 用帳密登入
 ![Feature_Login](./public/images/Feature_Login.png)
