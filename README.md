@@ -75,7 +75,7 @@ npm install
 
 - 首先確保個人本地端的資料庫有啟動，並建立一個名稱為 `expense_tracker` 的資料庫。
 - 確認個人本地端，與連線該資料庫的帳密是否一致
-- 為了符合教案規劃，以及建立種子資料中預設使用者與預設支出清單、支出類別的關聯（User1 廣志，擁有 id = 1~4 的支出，User2 小新擁有 id = 5 的支出），開發過程有建立多個 migrations 檔案，請先執行以下指令後，讓 Sequelize Model Instance 後續可以用相同的規格跟資料庫溝通。
+- 為了符合教案規劃，以及建立種子資料中預設使用者與預設支出清單、支出類別的關聯（User1 廣志，擁有 id = 1~3, 5 的支出，User2 小新擁有 id = 4 的支出），開發過程有建立多個 migrations 檔案，請先執行以下指令後，讓 Sequelize Model Instance 後續可以用相同的規格跟資料庫溝通。
 
 ```
 npx sequelize db:migrate
