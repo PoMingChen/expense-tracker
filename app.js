@@ -90,10 +90,12 @@ app.use(passport.session())
 // });
 
 app.use(messageHandler)
-app.use(router) // 將 request 導入路由器(思考要放在 app.get('/' ,...) 之前還是之後？) 甚至之後 app.get('/'） 要直接 redirect 到 register ？
+
 app.get('/', (req, res) => {
   res.redirect('/register')
 })
+
+app.use(router) // 將 request 導入路由器(思考要放在 app.get('/' ,...) 之前還是之後？) 甚至之後 app.get('/'） 要直接 redirect 到 register ？
 
 app.use(errorHandler)
 
