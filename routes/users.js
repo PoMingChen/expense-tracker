@@ -8,7 +8,6 @@ const User = db.User
 router.post('/', async (req, res, next) => {
 
   // Get user input from the request body
-  console.log(req.body)
   const { name, email, password, confirmPassword } = req.body
 
   const findUser = await User.findOne({ where: { email } })
@@ -25,7 +24,6 @@ router.post('/', async (req, res, next) => {
     error.errorMessage = '驗證密碼與密碼不符'
     return next(error)
   } else if (findUser) {
-    // Check if the user already
     const error = new Error()
     error.errorMessage = 'email 已註冊'
     return next(error)

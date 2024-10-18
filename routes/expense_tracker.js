@@ -4,26 +4,18 @@ const db = require('../models')
 const { literal } = require('sequelize');  // Import literal here
 const recordList = db.Record
 
-
-
-// don't load the file itself
-// const expense_tracker = require('./expense_tracker.js')
-// router.use('/expense_tracker', expense_tracker)
-
-// router.get('/', (req, res) => {
-//   res.render('index') // renders the index.hbs file
-// })
-
+// Retrieve all spending records for the user from the database to show at index.hbs
 router.get('/', (req, res, next) => {
-  let matchedCategoryId = req.query.categoryId;  // Retrieve the   // If no category is selected or categoryId is an empty string, set it to null
+  let matchedCategoryId = req.query.categoryId;
+  const userId = req.user.id;
+
   if (!matchedCategoryId) {
-    matchedCategoryId = null;  // Handle case where no category is selected
+    matchedCategoryId = null;  // If no category is selected or categoryId is an empty string, set it to null
   } else {
     matchedCategoryId = parseInt(matchedCategoryId, 10); // Convert categoryId to integer if it's present
   }
-  const userId = req.user.id;
 
-  // Build the base where condition (only by userId)
+  // Build the base where-condition (only by userId)
   let whereCondition = { userId };
 
   // If the user has selected a category, add the category condition
@@ -31,10 +23,9 @@ router.get('/', (req, res, next) => {
     whereCondition.categoryId = matchedCategoryId;
   }
 
-  // Retrieve all restaurants for the user from the database
   recordList.findAll({
     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    where: whereCondition, // Use the dynamically generated where condition
+    where: whereCondition, // Use the dynamically generated where-condition
     raw: true
   })
     .then((records) => {
@@ -46,7 +37,7 @@ router.get('/', (req, res, next) => {
       res.render('index', {
         records,
         matchedCategoryId,
-        totalAmount // Pass the total amount to the view
+        totalAmount
       });
     })
     .catch((error) => {
@@ -59,14 +50,11 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 
-router.post('/', (req, res, next) => { // don't forget to next parameter
-  // const formData = req.body
+// Create a new spending record in the database
+router.post('/', (req, res, next) => {
   const { name, date, category, amount } = req.body;
   const userId = req.user.id
 
-  console.log(req.body)
-
-  // Create a new record in the database using formData
   return recordList.create({
     name,
     date,
@@ -86,8 +74,7 @@ router.post('/', (req, res, next) => { // don't forget to next parameter
 
 // Fetch specific record by ID and check access permissions
 router.get('/:id/edit', (req, res, next) => {
-  // The req.params.id is used to access the id parameter within the route handler.
-  const id = req.params.id
+  const id = req.params.id // The req.params.id is used to access the id parameter within the route handler.
   const userId = req.user.id // Store the user.id from the deserialized req.user
 
   recordList.findByPk(id, {
@@ -100,13 +87,12 @@ router.get('/:id/edit', (req, res, next) => {
         return res.redirect('/expense_tracker')
       }
 
-      // If the userId associated with this restaurant doesn't match the current logged-in user's userId (req.user.id), show an unauthorized error message
+      // If the userId associated with this spending record doesn't match the current logged-in user's userId (req.user.id), show an unauthorized error message
       if (record.userId !== userId) {
         req.flash('error', '權限不足')
         return res.redirect('/expense_tracker')
       }
-      console.log(record.date); // Log the date to check its value
-      console.log(record.categoryId);
+
       res.render('edit', { record })
     })
     .catch((error) => {
@@ -133,7 +119,7 @@ router.post('/:id/edit', (req, res, next) => {
         return res.redirect('/expense_tracker')
       }
 
-      //Make sure to use restaurant, not restaurantList, as this is an instance method.
+      //Make sure to use record, not recordList, as this is an instance method.
       return record.update(updateData)  // No need to write { where: { id } } since we already fetched it using findByPk earlier.
         .then(() => {
           req.flash('success', '更新成功!')
@@ -164,7 +150,6 @@ router.delete('/:id', (req, res, next) => {
         return res.redirect('/expense_tracker')
       }
 
-      //Make sure to use restaurant, not restaurantList, as this is an instance method.
       return record.destroy()// No need to write { where: { id } } since we already fetched it using findByPk earlier.
         .then(() => {
           req.flash('success', '刪除成功!')
@@ -176,7 +161,5 @@ router.delete('/:id', (req, res, next) => {
       next(error)
     })
 })
-
-
 
 module.exports = router

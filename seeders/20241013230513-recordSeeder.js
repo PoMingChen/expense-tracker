@@ -114,7 +114,7 @@ module.exports = {
       await queryInterface.bulkInsert('Users', existingUsers, { transaction });
       await queryInterface.bulkInsert('Records', existingRestaurants, { transaction });
 
-      await transaction.commit();  // Commit the transaction
+      await transaction.commit();
     } catch (error) {
       if (transaction) await transaction.rollback();
       throw error; // Re-throw the error to ensure proper error handling
